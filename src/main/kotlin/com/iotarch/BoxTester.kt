@@ -1,51 +1,51 @@
 package com.iotarch
 
+import com.iotarch.view.BottomView
+import com.iotarch.view.InputFormView
+import com.iotarch.view.TopView
 import sun.security.util.Length
+import tornadofx.*
 import java.util.*
 
 fun main(args: Array<String>) {
 
-    val box3 = Box(23f, 14f, 13f)
-    val box5 = Box(39.5f, 27.5f, 23f)
+    launch<MyApp>(args)
 
+}
 
-    println("Post Box Checking System, type -1 to exit")
-    println("=============================================")
+class MyApp: App(MyView::class)
 
-    val exitCode=0
+class MyView: View("This is the MainView") {
 
-    while(exitCode!=-1) {
+    val topView = find(TopView::class)
 
-        println("New Item")
+    val bottomView:BottomView by inject()
 
+    val inputForm:InputFormView by inject()
 
-        val scanner = Scanner(System.`in`)
+    override val root = borderpane  {
 
-        println("Please enter object's length")
-        val length: Float = scanner.nextInt().toFloat()
-        if (length==-1f) break
-        println("Please enter object's width")
-        val width: Float = scanner.nextInt().toFloat()
-        if (width==-1f) break
-        println("Please enter object's height")
-        val height: Float = scanner.nextInt().toFloat()
-        if (height==-1f) break
+        top=topView.root
+        bottom = bottomView.root
+        right = inputForm.root
 
-        if(box3.validate(length,width,height)){
-            println("box3")
-        }else if(box5.validate(length,width,height)){
-            println("box5")
-        }else{
-            println("You Item is too big to fit into our box")
-        }
-        println("---------------------------------")
     }
 
 }
 
 
+class Box3(boxlength:Float,boxWidth:Float,boxHeight:Float,name:String):Box(boxlength,boxWidth,boxHeight,name){
 
-data class Box(val boxlength: Float,val boxWidth: Float,val boxHeight:Float) {
+
+}
+
+class Box5(boxlength:Float,boxWidth:Float,boxHeight:Float,name:String):Box(boxlength,boxWidth,boxHeight,name){
+
+
+}
+
+
+open class Box(val boxlength: Float,val boxWidth: Float,val boxHeight:Float,val name:String) {
 
 
     fun validate(length:Float,width:Float,height:Float): Boolean{
