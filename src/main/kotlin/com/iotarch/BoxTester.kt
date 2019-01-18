@@ -17,6 +17,7 @@ class MyApp: App(MyView::class)
 
 class MyView: View("This is the MainView") {
 
+
     val topView = find(TopView::class)
 
     val bottomView:BottomView by inject()
@@ -34,31 +35,31 @@ class MyView: View("This is the MainView") {
 }
 
 
-class Box3(boxlength:Float,boxWidth:Float,boxHeight:Float,name:String):Box(boxlength,boxWidth,boxHeight,name){
+//class Box3(boxlength:Float,boxWidth:Float,boxHeight:Float,name:String):Box(boxlength,boxWidth,boxHeight,name){
+//
+//
+//}
+//
+//class Box5(boxlength:Float,boxWidth:Float,boxHeight:Float,name:String):Box(boxlength,boxWidth,boxHeight,name){
+//
+//
+//}
 
 
-}
-
-class Box5(boxlength:Float,boxWidth:Float,boxHeight:Float,name:String):Box(boxlength,boxWidth,boxHeight,name){
-
-
-}
-
-
-open class Box(val boxlength: Float,val boxWidth: Float,val boxHeight:Float,val name:String) {
-
-
-    fun validate(length:Float,width:Float,height:Float): Boolean{
-
-        if(boxlength<length) {
-            return false
-        }else if(boxWidth<width) {
-            return false
-        }else if(boxHeight<height){
-            return false
-        }
-
-        return true
-    }
-
-}
+//open class Box(val boxlength: Float,val boxWidth: Float,val boxHeight:Float,val name:String) {
+//
+//
+//    fun validate(length:Float,width:Float,height:Float): Boolean{
+//
+//        if(boxlength<length) {
+//            return false
+//        }else if(boxWidth<width) {
+//            return false
+//        }else if(boxHeight<height){
+//            return false
+//        }
+//
+//        return true
+//    }
+//
+//}

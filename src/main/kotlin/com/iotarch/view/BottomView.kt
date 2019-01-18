@@ -11,7 +11,7 @@ class BottomView: View(),UpdateBoxResultListener{
 
     val controller:MyController by inject()
 
-    var rLabel = Label()
+    var rLabel:Label by singleAssign()
 
     init {
         controller.updateResultListener(this)
@@ -24,6 +24,8 @@ class BottomView: View(),UpdateBoxResultListener{
     }
 
     override val root=hbox{
+
+        rLabel = Label()
 
         this.add(rLabel)
 

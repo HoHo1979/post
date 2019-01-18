@@ -1,10 +1,12 @@
 package com.iotarch.controller
 
-import com.iotarch.Box
+//import com.iotarch.Box
+import com.iotarch.model.Box
 import com.iotarch.UpdateBoxResultListener
 import com.iotarch.model.TempData
 import sun.security.util.Length
 import tornadofx.Controller
+import java.util.*
 
 
 class MyController:Controller(){
@@ -18,8 +20,11 @@ class MyController:Controller(){
 
     fun findTheCorrectBox(length:Float,width:Float,height:Float){
 
+        //Sort the list by the total(length+width+height),use the smallest box to verify the search of the right box
+        TempData.instance.boxesList=TempData.instance.boxesList.sorted { o1, o2 -> if(o1.total-o2.total>0) 1 else -1 }
+
         for(box in TempData.instance.boxesList){
-            if(box.boxlength>length && box.boxWidth>width && box.boxHeight>height){
+            if(box.length>length && box.width>width && box.height>height){
                 listener.updateResult(box.name)
                 break
             }
@@ -31,16 +36,9 @@ class MyController:Controller(){
         return TempData.instance.boxesList
     }
 
-    fun boxInfo(boxWidth: Float, boxHeight: Float, boxlength: Float) {
+    fun saveBox(box: Box) {
 
-        //updateInputFormView's TextField
-
-    }
-
-    fun resetAllTextField() {
-
-
-
+        TempData.instance.boxesList.add(box)
     }
 
 

@@ -1,7 +1,10 @@
 package com.iotarch.model
 
-import com.iotarch.Box
+//import com.iotarch.Box
+import com.iotarch.model.Box
+import tornadofx.launch
 import tornadofx.observable
+import kotlin.system.measureNanoTime
 
 class TempData{
 
@@ -10,13 +13,23 @@ class TempData{
     }
 
 
-    val box3 = Box(23f, 14f, 13f,"box3")
-    val box5 = Box(39.5f, 27.5f, 23f,"box5")
+    val box3 = Box("box3",23f, 14f, 13f)
+    val box5 = Box("box5",39.5f, 27.5f, 23f)
 
     var boxesList = mutableListOf<Box>(box3,box5).observable()
 
     fun newBox(box:Box){
-        boxesList.add(box)
+
+        var time=measureNanoTime {
+
+            boxesList.add(box)
+
+        }
+
+
+
+        println(time)
+
     }
 
 }
