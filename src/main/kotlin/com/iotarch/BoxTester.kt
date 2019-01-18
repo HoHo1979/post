@@ -13,15 +13,20 @@ fun main(args: Array<String>) {
 
 }
 
+//This is a TornadoFX app that determine right box size for user.
+
 class MyApp: App(MyView::class)
 
 class MyView: View("This is the MainView") {
 
-
+    //TopView has two menu, Package->Caculation->New Item reset the fields to empty
+    // Setting->New Box->Box Size for creating New Box
     val topView = find(TopView::class)
 
+    //Display the correct Box for user after user input item size
     val bottomView:BottomView by inject()
 
+    //A form that takes user input and find the correct box
     val inputForm:InputFormView by inject()
 
     override val root = borderpane  {

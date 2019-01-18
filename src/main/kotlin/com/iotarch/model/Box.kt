@@ -24,13 +24,13 @@ open class Box(name:String,width:Float,length:Float,height:Float){
 }
 
 
-class Box3(name: String,width: Float,length: Float,height: Float):Box(name,width,length,height){
-
-
-}
-
-
-class Box5(name: String,width: Float,length: Float,height: Float):Box(name,width,length,height){
-
-
-}
+//class Box3(name: String,width: Float,length: Float,height: Float):Box(name,width,length,height){
+//
+//
+//}
+//
+//
+//class Box5(name: String,width: Float,length: Float,height: Float):Box(name,width,length,height){
+//
+//
+//}
