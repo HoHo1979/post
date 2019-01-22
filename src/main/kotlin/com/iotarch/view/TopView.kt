@@ -4,15 +4,10 @@ import com.iotarch.ResetTextFieldRequest
 import com.iotarch.controller.MyController
 import com.iotarch.model.Box
 import com.iotarch.model.BoxModel
-import com.iotarch.model.TempData
-import javafx.scene.control.Menu
-import javafx.scene.control.MenuBar
+import com.iotarch.model.BoxData
 import javafx.scene.layout.BorderPane
 import javafx.stage.StageStyle
-import jdk.internal.util.xml.impl.Input
 import tornadofx.*
-import kotlin.reflect.full.valueParameters
-import kotlin.reflect.jvm.javaGetter
 
 class TopView: View(){
 
@@ -62,8 +57,8 @@ class MyFragment: Fragment() {
 
     val controller: MyController by inject()
 
-    var boxes = TempData.instance.boxesList
-    val model = BoxModel(Box("",13f,13f,13f))
+    var boxes = BoxData.instance.boxesList
+    val model = BoxModel(Box("",15f,14f,13f))
 
     init {
         with(root){
@@ -73,8 +68,8 @@ class MyFragment: Fragment() {
                 tableview(boxes) {
 
                     column("Box Name",Box::name)
-                    column("Width",Box::width)
                     column("Length",Box::length)
+                    column("Width",Box::width)
                     column("Height",Box::height)
                     column("Total",Box::total)
 
@@ -95,11 +90,12 @@ class MyFragment: Fragment() {
                         field("Name") {
                             textfield(model.name)
                         }
-                        field("width") {
-                            textfield(model.width)
-                        }
+
                         field("length") {
                             textfield(model.length)
+                        }
+                        field("width") {
+                            textfield(model.width)
                         }
                         field("height") {
                             textfield(model.height)
@@ -107,7 +103,7 @@ class MyFragment: Fragment() {
                         button("Add") {
                             enableWhen(model.dirty)
                             action {
-                                var newBox = Box(model.name.value,model.width.value.toFloat(),model.length.value.toFloat(),model.height.value.toFloat())
+                                var newBox = Box(model.name.value,model.length.value.toFloat(),model.width.value.toFloat(),model.height.value.toFloat())
                                 controller.saveBox(newBox)
                             }
                         }

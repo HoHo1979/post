@@ -3,10 +3,9 @@ package com.iotarch.controller
 //import com.iotarch.Box
 import com.iotarch.model.Box
 import com.iotarch.UpdateBoxResultListener
-import com.iotarch.model.TempData
-import sun.security.util.Length
+import com.iotarch.model.BoxData
+import javafx.collections.transformation.SortedList
 import tornadofx.Controller
-import java.util.*
 
 
 class MyController:Controller(){
@@ -21,25 +20,36 @@ class MyController:Controller(){
     fun findTheCorrectBox(length:Float,width:Float,height:Float){
 
         //Sort the list by the total(length+width+height),use the smallest box to verify the search of the right box
-        TempData.instance.boxesList=TempData.instance.boxesList.sorted { o1, o2 -> if(o1.total-o2.total>0) 1 else -1 }
+        //This will cause the excpetion when add another new BOX in fragment.
+        //BoxData.instance.boxesList=BoxData.instance.boxesList.sorted { o1, o2 -> if(o1.total-o2.total>0) 1 else -1 }
 
-        for(box in TempData.instance.boxesList){
+      val sortedList=BoxData.instance.boxesList.sorted(compareBy(Box::total))
+
+        var findBox=false
+
+        for(box in sortedList){
             if(box.length>length && box.width>width && box.height>height){
                 listener.updateResult(box.name)
+                findBox=true
                 break
             }
         }
+
+        if(findBox==false)
+            listener.updateResult("We don't have right box")
+
     }
 
     fun findAllBoxes():MutableList<Box>{
 
-        return TempData.instance.boxesList
+        return BoxData.instance.boxesList
     }
 
-    fun saveBox(box: Box) {
-
-        TempData.instance.boxesList.add(box)
+    fun saveBox(box:Box) {
+        BoxData.instance.newBox(box)
     }
+
+
 
 
 }
